@@ -1,0 +1,38 @@
+version: '3'
+services:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.17.1
+    restart: unless-stopped
+    hostname: NODE_NAME
+    network_mode: bridge
+    ports:
+      # HTTP/REST
+      - 5601:5601/tcp
+    environment:
+      TELEMETRY_OPTIN: 'false'
+      TELEMETRY_ENABLED: 'false'
+      NEWSFEED_ENABLED: 'false'
+
+      SERVER_NAME: 'NODE_NAME'
+      SERVER_HOST: '0.0.0.0'
+      SERVER_PORT: 5601
+      SERVER_MAXPAYLOADBYTES: 8388608
+
+      ELASTICSEARCH_HOSTS: 'http://10.0.0.144:9200'
+      ELASTICSEARCH_USERNAME: 'kibana_system'
+      ELASTICSEARCH_PASSWORD: 'CHANGEME'
+      ELASTICSEARCH_REQUESTTIMEOUT: 132000
+      ELASTICSEARCH_SHARDTIMEOUT: 120000
+
+      #ELASTICSEARCH_SSL_CERTIFICATE: /etc/kibana/certs/node/node.crt
+      #ELASTICSEARCH_SSL_KEY: /etc/kibana/certs/node/node.key
+      #ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: /etc/kibana/certs/ca/ca.crt
+      ELASTICSEARCH_SSL_VERIFICATIONMODE: 'none'
+
+      KIBANA_AUTOCOMPLETETIMEOUT: 3000
+      KIBANA_AUTOCOMPLETETERMINATEAFTER: 2500000
+
+      VIS_TYPE_VEGA_ENABLEEXTERNALURLS: 'true'
+
+      XPACK_MAPS_SHOWMAPVISUALIZATIONTYPES: 'true'
+      XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: 'ElastiFlow_0123456789_0123456789_0123456789'
