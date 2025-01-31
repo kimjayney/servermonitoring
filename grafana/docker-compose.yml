@@ -11,7 +11,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 50m  # RAM 제한: 50MB
+          memory: 700m  # RAM 제한: 50MB
         reservations:
           memory: 30m  # 최소 예약 메모리: 30MB
     restart: unless-stopped
