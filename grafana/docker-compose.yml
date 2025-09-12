@@ -4,11 +4,13 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    networks:
+      webapp-infra:
     environment:
-      VIRTUAL_HOST: exampledomainjenny.com
+      VIRTUAL_HOST: domain.example.com
       VIRTUAL_PORT: 3000
-      LETSENCRYPT_HOST: exampledomainjenny.com
-      LETSENCRYPT_EMAIL: example@example.com
+      LETSENCRYPT_HOST: domain.example.com
+      LETSENCRYPT_EMAIL: contact@domain.example.com
     volumes:
       - grafana-data:/var/lib/grafana  # 호스트의 ./data 디렉토리를 컨테이너의 /var/lib/grafana와 매핑
     deploy:
@@ -21,3 +23,6 @@ services:
 
 volumes:
   grafana-data:  # 네임드 볼륨 정의 (필요 시 사용 가능)
+networks:
+  webapp-infra:
+    external: true
