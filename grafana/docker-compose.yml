@@ -4,8 +4,11 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
-    ports:
-      - "3000:3000"
+    environment:
+      VIRTUAL_HOST: exampledomainjenny.com
+      VIRTUAL_PORT: 3000
+      LETSENCRYPT_HOST: exampledomainjenny.com
+      LETSENCRYPT_EMAIL: example@example.com
     volumes:
       - grafana-data:/var/lib/grafana  # 호스트의 ./data 디렉토리를 컨테이너의 /var/lib/grafana와 매핑
     deploy:
